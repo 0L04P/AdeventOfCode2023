@@ -1,0 +1,36 @@
+1) dato un array arr per avere l'ultimo elemento posso fare arr.alice(-1)
+2) Data una stringa "7777sevenine9999" una Regex del tipo /seven|nine/ matcha solo "seven", ma perde totalmente il "nine"
+che ad esso è sovrapposto ---> le regex quando leggono consumano le lettere (= spostano un cursore in avanti)
+per poter verificare che la condizione della regex sia verificata da dei caratteri prima o dopo a dove è il cursore 
+devo usare i LOOKAHEAD o i LOOKBEHIND:
+
+=== LOOKAHEAD ===
+Lookahead positivo:
+X(?=Y) significa "cerca X, ma trova la corrispondenza solo se seguita da Y"
+
+Lookahead negativo:
+X(?!Y), significa "cerca X, ma solo se non seguito da Y".
+
+Es:
+"1 turkey costs 30€"
+
+\d+€ matcha 30€ 
+\d+(?=€) matcha solo 30 
+
+Es.
+"7777sevenine9999"
+Array.from(riga.matchAll(/(?=(seven|nine))/g));
+
+
+=== LOOKBEHIND ===
+Lookbehind positivo: 
+(?<=Y)X, "trova X, ma solo se c’è Y prima di esso"
+Lookbehind negativo: 
+(?<!Y)X, "trova X, ma solo se non c’è alcun Y prima di esso"
+
+Es:
+"1 turkey costs $30"
+
+(?<=\$)\d+ matcha 30
+
+
